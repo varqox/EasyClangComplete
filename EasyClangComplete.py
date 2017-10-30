@@ -137,6 +137,8 @@ class EasyClangComplete(sublime_plugin.EventListener):
     UPDATE_JOB_TAG = "update"
     INFO_JOB_TAG = "info"
 
+    # random thing
+
     view_config_manager = None
     settings_manager = None
 
