@@ -152,7 +152,7 @@ class TestViewConfig(GuiTestWrapper):
         view_config.touch()
         self.assertTrue(view_config.get_age() < 3)
         time.sleep(3)
-        self.assertTrue(view_config.is_older_than(3))
+        self.assertTrue(view_config.is_older_than(2.9))
         self.tear_down()
 
 
