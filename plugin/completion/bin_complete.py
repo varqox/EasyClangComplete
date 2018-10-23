@@ -176,11 +176,7 @@ class Completer(BaseCompleter):
             str: Output from command
         """
         file_body = view.substr(sublime.Region(0, view.size()))
-
         tempdir = Tools.get_temp_dir()
-        temp_file_name = path.join(tempdir, path.basename(view.file_name()))
-        with open(temp_file_name, "w", encoding='utf-8') as tmp_file:
-            tmp_file.write(file_body)
 
         flags = self.clang_flags
         if task_type == "update":
@@ -192,13 +188,13 @@ class Completer(BaseCompleter):
             (row, col) = SublBridge.cursor_pos(view, cursor_pos)
             complete_at_str = Completer.compl_str_mask.format(
                 complete_flag="-code-completion-at",
-                file=temp_file_name, row=row, col=col)
+                file=view.file_name(), row=row, col=col)
             flags += ["-Xclang"] + [complete_at_str]
         else:
             log.critical(" unknown type of cmd command wanted.")
             return None
         # construct cmd from building parts
-        complete_cmd = [self.clang_binary] + flags + [temp_file_name]
+        complete_cmd = [self.clang_binary] + flags + [view.file_name()]
         # now run this command
         log.debug("clang command: \n%s", complete_cmd)
 
