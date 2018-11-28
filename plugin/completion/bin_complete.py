@@ -176,7 +176,6 @@ class Completer(BaseCompleter):
             str: Output from command
         """
         file_body = view.substr(sublime.Region(0, view.size()))
-        tempdir = Tools.get_temp_dir()
 
         flags = self.clang_flags
         if task_type == "update":
